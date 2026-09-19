@@ -12,7 +12,7 @@ Date of the scored runs: 2026-09-18 (America/Chicago).
 | Empty answers | T04, T05 (both `finish_reason=length` at 60k) | none in the scored set |
 | Compile/apply failures | T01 does not compile | none |
 
-Read [FINDINGS.md](FINDINGS.md) for the write-up, [SCORES.csv](SCORES.csv) for the table, [SETTINGS.md](SETTINGS.md) to reproduce serving, [METHOD.md](METHOD.md) for the protocol.
+Copy-ready wiki page: [WIKI.md](WIKI.md). Expanded write-up: [FINDINGS.md](FINDINGS.md). Table: [SCORES.csv](SCORES.csv). Serve flags: [SETTINGS.md](SETTINGS.md). Protocol: [METHOD.md](METHOD.md).
 
 ## What is in this repo
 
