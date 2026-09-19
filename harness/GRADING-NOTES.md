@@ -2,7 +2,7 @@
 
 Recorded as they happen, during the run, not reconstructed afterward.
 
-## T03 n8n-code-node, qwen38 (Qwen3.8-27B GPTQ-Int4, vLLM, Arc Pro B70)
+## T03 n8n-code-node, qwen38 (Qwen3.8-27B GPTQ-Int4, vLLM on Lawlab: EPYC 7532, 256 GB DDR4, two Arc Pro B70s)
 
 Scored **0 for correctness**. The request returned 32,599 completion tokens and an
 empty `content` field: the model reasoned until it stopped and never emitted the

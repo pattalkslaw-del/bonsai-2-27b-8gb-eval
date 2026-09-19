@@ -1,6 +1,6 @@
 # Findings
 
-Scored run: Bonsai 2 27B PTQ1_0 on an RTX 2080 SUPER (8 GB) vs Qwen3.8-27B GPTQ-Int4 on an Intel Arc Pro B70. Same prompts, same sampling, thinking on. Suite totals: **Bonsai 46 / 80**, **Qwen3.8 71 / 80**.
+Scored run: Bonsai 2 27B PTQ1_0 on an RTX 2080 SUPER (8 GB) vs Qwen3.8-27B GPTQ-Int4 on Lawlab (AMD EPYC 7532, 256 GB DDR4, two Intel Arc Pro B70s; vLLM on one B70). Same prompts, same sampling, thinking on. Suite totals: **Bonsai 46 / 80**, **Qwen3.8 71 / 80**.
 
 Speed is not compared. Token counts and elapsed times are in `runs/*/meta.json`.
 

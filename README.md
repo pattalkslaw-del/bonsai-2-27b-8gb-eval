@@ -54,7 +54,7 @@ A single coding task on the 2080 SUPER took 6 to 45 minutes because reasoning co
 ## Hardware used here
 
 - Bonsai: Render-1, RTX 2080 SUPER 8 GB (Turing, sm_75), PrismML llama.cpp, Q4 KV, 65536 context, all 64 layers on GPU.
-- Qwen3.8: lawlab, Intel Arc Pro B70, vLLM GPTQ-Int4, 131072 max length.
+- Qwen3.8: Lawlab, AMD EPYC 7532, 256 GB DDR4, two Intel Arc Pro B70s. vLLM GPTQ-Int4 on one B70, 131072 max length.
 
 ## License
 

@@ -40,7 +40,7 @@ Throughput on a short smoke: prefill 99.4 tok/s, decode 19.8-20.4 tok/s, card 98
 
 ## Comparison model
 
-Qwen3.8-27B GPTQ-Int4, vLLM, Intel Arc Pro B70, 131072 max length, served name `qwen38`. Different quantizer, runtime, and silicon. No speed claim from wall times.
+Qwen3.8-27B GPTQ-Int4 on Lawlab: AMD EPYC 7532, 256 GB DDR4, two Intel Arc Pro B70s, vLLM on one B70, 131072 max length, served name `qwen38`. Different quantizer, runtime, and silicon. No speed claim from wall times.
 
 Sampling for both: temperature 0.2, top_p 0.95, seed 1729, thinking on, one sample, max_tokens 60000 (T07: 45000). Client timeout on the scored Bonsai pass: 7200 s.
 

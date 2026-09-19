@@ -105,7 +105,7 @@ Reasoning on the coding tasks used 10k to 60k completion tokens, so one task is 
 
 ## Comparison endpoint (not interchangeable silicon)
 
-Qwen3.8-27B GPTQ-Int4 under vLLM on an Intel Arc Pro B70, OpenAI-compatible at `http://<lawlab>:8000/v1`, served name `qwen38`, max length 131072. Traces land in `message.reasoning` on that build, not `reasoning_content`. The harness reads both.
+Lawlab is an AMD EPYC 7532 with 256 GB DDR4 and two Intel Arc Pro B70s. Qwen3.8-27B GPTQ-Int4 ran under vLLM on one of those B70s, OpenAI-compatible at `http://<lawlab>:8000/v1`, served name `qwen38`, max length 131072. Traces land in `message.reasoning` on that build, not `reasoning_content`. The harness reads both.
 
 ## Client request body (do not change mid-suite)
 

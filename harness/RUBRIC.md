@@ -47,9 +47,10 @@ prose reads.
 
 - Bonsai 2 27B is a ternary quantization of Qwen3.8-27B. This is a quantization
   test, not a contest between two model families.
-- Bonsai runs on an RTX 2080 SUPER (8 GB, Turing) under llama.cpp with Q4 KV;
-  Qwen3.8-27B runs GPTQ-Int4 on an Intel Arc Pro B70 under vLLM. Different
-  quantizer, different runtime, different kernels.
+- Bonsai runs on an RTX 2080 SUPER (8 GB, Turing) under llama.cpp with Q4 KV.
+  Qwen3.8-27B runs GPTQ-Int4 under vLLM on Lawlab: AMD EPYC 7532, 256 GB DDR4,
+  two Intel Arc Pro B70s (one card used for this endpoint). Different quantizer,
+  different runtime, different kernels.
 - Q4 KV is a deliberate handicap on the Bonsai side, chosen to fit 8 GB. Any
   degradation it causes is part of what the 8 GB claim actually costs.
 - Both models run with thinking enabled. The 98.2% retention figure PrismML
