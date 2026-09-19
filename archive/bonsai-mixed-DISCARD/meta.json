@@ -1,0 +1,109 @@
+{
+  "label": "bonsai",
+  "model": "bonsai2-27b-ptq1_0",
+  "base_url": "http://127.0.0.1:8097/v1",
+  "temperature": 0.2,
+  "seed": 1729,
+  "started": "2026-09-18T11:41:26-0500",
+  "tasks": {
+    "T01": {
+      "name": "go-handler",
+      "category": "code-gen",
+      "elapsed_s": 496.19,
+      "usage": {
+        "completion_tokens": 13219,
+        "prompt_tokens": 291,
+        "total_tokens": 13510,
+        "prompt_tokens_details": {
+          "cached_tokens": 287
+        }
+      },
+      "finish_reason": "stop"
+    },
+    "T02": {
+      "name": "ts-bugfix",
+      "category": "debug",
+      "elapsed_s": 551.38,
+      "usage": {
+        "completion_tokens": 14626,
+        "prompt_tokens": 293,
+        "total_tokens": 14919,
+        "prompt_tokens_details": {
+          "cached_tokens": 289
+        }
+      },
+      "finish_reason": "stop"
+    },
+    "T03": {
+      "name": "n8n-code-node",
+      "category": "code-gen",
+      "elapsed_s": null,
+      "usage": {},
+      "finish_reason": "ERROR: TimeoutError: timed out"
+    },
+    "T04": {
+      "name": "sql-migration",
+      "category": "code-gen",
+      "elapsed_s": 1073.77,
+      "usage": {
+        "completion_tokens": 20344,
+        "prompt_tokens": 334,
+        "total_tokens": 20678,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "finish_reason": "stop"
+    },
+    "T05": {
+      "name": "log-diagnosis",
+      "category": "debug",
+      "elapsed_s": null,
+      "usage": {},
+      "finish_reason": "ERROR: TimeoutError: timed out"
+    },
+    "T06": {
+      "name": "refactor-tests",
+      "category": "code-gen",
+      "elapsed_s": 1593.3,
+      "usage": {
+        "completion_tokens": 30316,
+        "prompt_tokens": 275,
+        "total_tokens": 30591,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "finish_reason": "stop"
+    },
+    "T07": {
+      "name": "long-context",
+      "category": "recall",
+      "elapsed_s": 254.69,
+      "usage": {
+        "completion_tokens": 4976,
+        "prompt_tokens": 16077,
+        "total_tokens": 21053,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "finish_reason": "stop"
+    },
+    "T08": {
+      "name": "tool-call",
+      "category": "agentic",
+      "elapsed_s": 243.77,
+      "usage": {
+        "completion_tokens": 6660,
+        "prompt_tokens": 282,
+        "total_tokens": 6942,
+        "prompt_tokens_details": {
+          "cached_tokens": 67
+        }
+      },
+      "finish_reason": "stop"
+    }
+  },
+  "finished": "2026-09-18T13:51:39-0500"
+}

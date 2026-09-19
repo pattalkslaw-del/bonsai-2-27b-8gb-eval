@@ -1,0 +1,123 @@
+{
+  "label": "bonsai",
+  "model": "bonsai2-27b-ptq1_0",
+  "base_url": "http://127.0.0.1:8097/v1",
+  "temperature": 0.2,
+  "seed": 1729,
+  "started": "2026-09-18T17:07:47-0500",
+  "tasks": {
+    "T01": {
+      "name": "go-handler",
+      "category": "code-gen",
+      "elapsed_s": 359.06,
+      "usage": {
+        "completion_tokens": 9688,
+        "prompt_tokens": 291,
+        "total_tokens": 9979,
+        "prompt_tokens_details": {
+          "cached_tokens": 67
+        }
+      },
+      "finish_reason": "stop"
+    },
+    "T02": {
+      "name": "ts-bugfix",
+      "category": "debug",
+      "elapsed_s": 493.4,
+      "usage": {
+        "completion_tokens": 13155,
+        "prompt_tokens": 293,
+        "total_tokens": 13448,
+        "prompt_tokens_details": {
+          "cached_tokens": 67
+        }
+      },
+      "finish_reason": "stop"
+    },
+    "T03": {
+      "name": "n8n-code-node",
+      "category": "code-gen",
+      "elapsed_s": 2211.58,
+      "usage": {
+        "completion_tokens": 50742,
+        "prompt_tokens": 286,
+        "total_tokens": 51028,
+        "prompt_tokens_details": {
+          "cached_tokens": 67
+        }
+      },
+      "finish_reason": "stop"
+    },
+    "T04": {
+      "name": "sql-migration",
+      "category": "code-gen",
+      "elapsed_s": 2716.11,
+      "usage": {
+        "completion_tokens": 60000,
+        "prompt_tokens": 334,
+        "total_tokens": 60334,
+        "prompt_tokens_details": {
+          "cached_tokens": 67
+        }
+      },
+      "finish_reason": "length"
+    },
+    "T05": {
+      "name": "log-diagnosis",
+      "category": "debug",
+      "elapsed_s": 2720.55,
+      "usage": {
+        "completion_tokens": 60000,
+        "prompt_tokens": 397,
+        "total_tokens": 60397,
+        "prompt_tokens_details": {
+          "cached_tokens": 67
+        }
+      },
+      "finish_reason": "length"
+    },
+    "T06": {
+      "name": "refactor-tests",
+      "category": "code-gen",
+      "elapsed_s": 1064.64,
+      "usage": {
+        "completion_tokens": 26735,
+        "prompt_tokens": 275,
+        "total_tokens": 27010,
+        "prompt_tokens_details": {
+          "cached_tokens": 67
+        }
+      },
+      "finish_reason": "stop"
+    },
+    "T07": {
+      "name": "long-context",
+      "category": "recall",
+      "elapsed_s": 255.19,
+      "usage": {
+        "completion_tokens": 4976,
+        "prompt_tokens": 16077,
+        "total_tokens": 21053,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "finish_reason": "stop"
+    },
+    "T08": {
+      "name": "tool-call",
+      "category": "agentic",
+      "elapsed_s": 243.69,
+      "usage": {
+        "completion_tokens": 6660,
+        "prompt_tokens": 282,
+        "total_tokens": 6942,
+        "prompt_tokens_details": {
+          "cached_tokens": 67
+        }
+      },
+      "finish_reason": "stop"
+    }
+  },
+  "finished": "2026-09-18T19:55:32-0500"
+}

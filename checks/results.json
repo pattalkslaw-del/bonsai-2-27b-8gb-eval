@@ -1,0 +1,271 @@
+{
+  "bonsai": {
+    "T01": {
+      "gofmt_ok": true,
+      "gofmt": " err != nil {\n\t\tif errors.Is(err, ErrDuplicate) {\n\t\t\twritePlain(w, http.StatusOK, \"already subscribed\")\n\t\t\treturn\n\t\t}\n\t\tslog.Error(\"failed to add subscriber\", \"email\", email, \"error\", err)\n\t\twritePlain(w, http.StatusInternalServerError, \"Internal Server Error\")\n\t\treturn\n\t}\n\n\twritePlain(w, http.StatusCreated, \"subscribed\")\n}\n\nfunc writePlain(w http.ResponseWriter, status int, body string) {\n\tw.Header().Set(\"Content-Type\", \"text/plain; charset=utf-8\")\n\tw.WriteHeader(status)\n\tfmt.Fprint(w, body)\n}\n",
+      "govet_rc": 1,
+      "govet": "# t01\n# [t01]\nvet: ./main.go:42:15: undefined: net\n",
+      "build_rc": 1,
+      "build": "# t01\n./main.go:42:15: undefined: net\n./main.go:42:19: multiple-value mail.ParseAddress(email) (value of type (*mail.Address, error)) in single-value context\n",
+      "compile_ok": false,
+      "ident_bug_net_mail": true,
+      "parseform_two_return": false
+    },
+    "T02": {
+      "src_chars": 620,
+      "checks": [
+        {
+          "name": "awaits_query",
+          "present": true
+        },
+        {
+          "name": "returns_404",
+          "present": true
+        },
+        {
+          "name": "null_id_check",
+          "present": true
+        },
+        {
+          "name": "opts_out_next_cache",
+          "present": false
+        },
+        {
+          "name": "keeps_module_cache",
+          "present": false
+        }
+      ],
+      "has_try": true
+    },
+    "T03": {
+      "syntax_ok": true,
+      "syntax": "",
+      "run_rc": 0,
+      "result": [
+        {
+          "json": {
+            "title": "new",
+            "link": "https://a.example/1",
+            "publishedAt": "2023-11-14T12:00:00.000Z",
+            "sourceHost": "a.example"
+          }
+        },
+        {
+          "json": {
+            "title": "dup-new",
+            "link": "https://b.example/d2",
+            "publishedAt": "2023-11-14T11:00:00.000Z",
+            "sourceHost": "b.example"
+          }
+        },
+        {
+          "json": {
+            "summary": true,
+            "kept": 2,
+            "dropped": 1,
+            "skipped": 2
+          }
+        }
+      ],
+      "uses_$input.all": false,
+      "uses_$items": true
+    },
+    "T04": {
+      "empty": true,
+      "chars": 0,
+      "schema_qualified_index": false,
+      "has_begin": false
+    },
+    "T05": {
+      "empty": true,
+      "chars": 0,
+      "mentions_temp_server": false,
+      "mentions_initdb": false,
+      "mentions_pg_isready": false,
+      "mentions_healthcheck": false
+    },
+    "T06": {
+      "ok": false,
+      "rc": 1,
+      "out": "--- FAIL: TestFee (0.00s)\n    --- FAIL: TestFee/flat_fee_with_no_cap (0.00s)\n        fee_test.go:265: Fee(0, 100, flat, 0) = 0; want 100\n    --- FAIL: TestFee/hourly_whole_hours (0.00s)\n        fee_test.go:265: Fee(2, 100, hourly, 0) = 0; want 200\n    --- FAIL: TestFee/hourly_fractional_hours_round_up (0.00s)\n        fee_test.go:265: Fee(1.999, 100, hourly, 0) = 0; want 200\n    --- FAIL: TestFee/hourly_half_cent_rounds_up (0.00s)\n        fee_test.go:265: Fee(0.005, 100, hourly, 0) = 0; want 1\n    --- FAIL: TestFee/contingency_exact_33_percent (0.00s)\n        fee_test.go:265: Fee(0, 100, contingency, 0) = 0; want 33\n    --- FAIL: TestFee/contingency_rounds_up (0.00s)\n        fee_test.go:265: Fee(0, 102, contingency, 0) = 0; want 34\n    --- FAIL: TestFee/contingency_small_value_rounds_up (0.00s)\n        fee_test.go:265: Fee(0, 3, contingency, 0) = 0; want 1\nFAIL\nFAIL\tt06\t0.002s\nFAIL\n",
+      "pkg": "fee",
+      "impl_chars": 1645,
+      "test_chars": 4389
+    },
+    "T07": {
+      "q1_fn": true,
+      "q1_downstream": true,
+      "q2_budget_3": true,
+      "q2_set_site": true,
+      "q2_exceed_fn": true,
+      "q3_pair": true,
+      "all_three": true,
+      "answer": "1. `cacheWarm` silently swallows `Load` errors; failed keys are omitted from `c.index`, so `readIndex` later returns `ErrNotFound` instead of the original error.\n\n2. The default retry budget is `3`; it is set by `defaultRetryBudget` and assigned in `newClient`. `drainQueue` can exceed it in aggregate because it allows up to 3 attempts for each queued key.\n\n3. `lockAll` and `flushSegment` would deadlock in the same goroutine because `lockAll` holds `c.mu` while calling `flushSegment`, which tries to lock the same non-recursive mutex."
+    },
+    "T08": {
+      "parse_ok": true,
+      "error": null,
+      "n_calls": 3,
+      "flags": [
+        "get_invoice_whole_list_not_per_id",
+        "single_get_invoice_not_per_matter"
+      ],
+      "calls": [
+        {
+          "name": "list_matters",
+          "arguments": {
+            "status": "open"
+          }
+        },
+        {
+          "name": "get_invoice",
+          "arguments": {
+            "matter_id": "{{step_1.matters}}"
+          }
+        },
+        {
+          "name": "send_email",
+          "arguments": {
+            "to": "billing@example.com",
+            "subject": "Reminder: unpaid invoices over $500",
+            "body": "Please review the following unpaid invoices over $500:\n{{step_2.invoices}}\n\nRegards"
+          }
+        }
+      ]
+    }
+  },
+  "qwen38": {
+    "T01": {
+      "gofmt_ok": true,
+      "gofmt": "usCreated, \"subscribed\")\n\tcase errors.Is(err, ErrDuplicate):\n\t\twritePlain(w, http.StatusOK, \"already subscribed\")\n\tdefault:\n\t\tslog.Error(\"subscribe failed\", \"email\", email, \"error\", err)\n\t\twritePlain(w, http.StatusInternalServerError, \"internal server error\")\n\t}\n}\n\nfunc writePlain(w http.ResponseWriter, status int, body string) {\n\tw.Header().Set(\"Content-Type\", \"text/plain; charset=utf-8\")\n\tw.WriteHeader(status)\n\tio.WriteString(w, body)\n}\n\nvar _ http.HandlerFunc = (*Server)(nil).handleSubscribe\n",
+      "govet_rc": 0,
+      "govet": "",
+      "build_rc": 1,
+      "build": "# t01\nruntime.main_main\u00b7f: function main is undeclared in the main package\n",
+      "compile_ok": false,
+      "ident_bug_net_mail": false,
+      "parseform_two_return": false
+    },
+    "T02": {
+      "src_chars": 753,
+      "checks": [
+        {
+          "name": "awaits_query",
+          "present": true
+        },
+        {
+          "name": "returns_404",
+          "present": true
+        },
+        {
+          "name": "null_id_check",
+          "present": true
+        },
+        {
+          "name": "opts_out_next_cache",
+          "present": true
+        },
+        {
+          "name": "keeps_module_cache",
+          "present": false
+        }
+      ],
+      "has_try": true
+    },
+    "T03": {
+      "syntax_ok": true,
+      "syntax": "",
+      "run_rc": 0,
+      "result": [
+        {
+          "json": {
+            "title": "new",
+            "link": "https://a.example/1",
+            "publishedAt": "2023-11-14T12:00:00.000Z",
+            "sourceHost": "a.example"
+          }
+        },
+        {
+          "json": {
+            "title": "dup-new",
+            "link": "https://b.example/d2",
+            "publishedAt": "2023-11-14T11:00:00.000Z",
+            "sourceHost": "b.example"
+          }
+        },
+        {
+          "json": {
+            "summary": true,
+            "kept": 2,
+            "dropped": 2,
+            "skipped": 2
+          }
+        }
+      ],
+      "uses_$input.all": true,
+      "uses_$items": false
+    },
+    "T04": {
+      "empty": false,
+      "chars": 3791,
+      "schema_qualified_index": false,
+      "has_begin": true
+    },
+    "T05": {
+      "empty": false,
+      "chars": 4194,
+      "mentions_temp_server": true,
+      "mentions_initdb": true,
+      "mentions_pg_isready": true,
+      "mentions_healthcheck": true
+    },
+    "T06": {
+      "ok": false,
+      "rc": 1,
+      "out": "--- FAIL: TestFee (0.00s)\n    --- FAIL: TestFee/hourly_0.005h_at_2c/h_rounds_up (0.00s)\n        fee_test.go:313: Fee() = 0, want 1\nFAIL\nFAIL\tt06\t0.002s\nFAIL\n",
+      "pkg": "fee",
+      "impl_chars": 1936,
+      "test_chars": 5260
+    },
+    "T07": {
+      "q1_fn": true,
+      "q1_downstream": true,
+      "q2_budget_3": true,
+      "q2_set_site": true,
+      "q2_exceed_fn": true,
+      "q3_pair": true,
+      "all_three": true,
+      "answer": "1. `cacheWarm` \u2014 it ignores `store.Load` errors with `continue`; downstream, `readIndex` then returns `ErrNotFound` for those keys, hiding the real load failure.\n\n2. The default is `3` (`defaultRetryBudget`), set in `newClient` as `retryBudget: defaultRetryBudget`; `drainQueue` can exceed the client\u2019s retry budget because it uses the constant `defaultRetryBudget` per queued key instead of `c.retryBudget`.\n\n3. `lockAll` and `flushSegment` \u2014 `lockAll` holds `c.mu` and calls `flushSegment`, which also calls `c.mu.Lock()`; Go\u2019s `sync.Mutex` is not reentrant, so the same goroutine deadlocks."
+    },
+    "T08": {
+      "parse_ok": true,
+      "error": null,
+      "n_calls": 3,
+      "flags": [
+        "single_get_invoice_not_per_matter"
+      ],
+      "calls": [
+        {
+          "name": "list_matters",
+          "arguments": {
+            "status": "open"
+          }
+        },
+        {
+          "name": "get_invoice",
+          "arguments": {
+            "matter_id": "{{step_1.matters[*].id}}"
+          }
+        },
+        {
+          "name": "send_email",
+          "arguments": {
+            "to": "billing@example.com",
+            "subject": "Reminder: unpaid invoices over $500",
+            "body": "Please review the following open matters with unpaid invoices over $500:\n\n{{step_2.invoices}}\n\nThank you."
+          }
+        }
+      ]
+    }
+  }
+}

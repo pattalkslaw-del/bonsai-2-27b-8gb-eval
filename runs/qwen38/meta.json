@@ -1,0 +1,100 @@
+{
+  "label": "qwen38",
+  "model": "qwen38",
+  "base_url": "http://<redacted-tailscale-ip>:8000/v1",
+  "temperature": 0.2,
+  "seed": 1729,
+  "started": "2026-09-18T14:44:15-0500",
+  "tasks": {
+    "T01": {
+      "name": "go-handler",
+      "elapsed_s": 381.6,
+      "usage": {
+        "prompt_tokens": 291,
+        "total_tokens": 25077,
+        "completion_tokens": 24786,
+        "prompt_tokens_details": null
+      },
+      "finish_reason": "stop"
+    },
+    "T02": {
+      "name": "ts-bugfix",
+      "elapsed_s": 257.81,
+      "usage": {
+        "prompt_tokens": 293,
+        "total_tokens": 17207,
+        "completion_tokens": 16914,
+        "prompt_tokens_details": null
+      },
+      "finish_reason": "stop"
+    },
+    "T03": {
+      "name": "n8n-code-node",
+      "elapsed_s": 399.88,
+      "usage": {
+        "prompt_tokens": 286,
+        "total_tokens": 26112,
+        "completion_tokens": 25826,
+        "prompt_tokens_details": null
+      },
+      "finish_reason": "stop"
+    },
+    "T04": {
+      "name": "sql-migration",
+      "elapsed_s": 318.71,
+      "usage": {
+        "prompt_tokens": 334,
+        "total_tokens": 21344,
+        "completion_tokens": 21010,
+        "prompt_tokens_details": null
+      },
+      "finish_reason": "stop"
+    },
+    "T05": {
+      "name": "log-diagnosis",
+      "elapsed_s": 506.39,
+      "usage": {
+        "prompt_tokens": 397,
+        "total_tokens": 34559,
+        "completion_tokens": 34162,
+        "prompt_tokens_details": null
+      },
+      "finish_reason": "stop"
+    },
+    "T06": {
+      "name": "refactor-tests",
+      "elapsed_s": 550.9,
+      "usage": {
+        "prompt_tokens": 275,
+        "total_tokens": 39593,
+        "completion_tokens": 39318,
+        "prompt_tokens_details": null
+      },
+      "finish_reason": "stop"
+    },
+    "T07": {
+      "name": "long-context",
+      "elapsed_s": 119.21,
+      "usage": {
+        "prompt_tokens": 16077,
+        "total_tokens": 23082,
+        "completion_tokens": 7005,
+        "prompt_tokens_details": null
+      },
+      "finish_reason": "stop"
+    },
+    "T08": {
+      "name": "tool-call",
+      "elapsed_s": 93.53,
+      "usage": {
+        "prompt_tokens": 282,
+        "total_tokens": 6739,
+        "completion_tokens": 6457,
+        "prompt_tokens_details": null
+      },
+      "finish_reason": "stop"
+    }
+  },
+  "finished": "2026-09-18T14:50:55-0500",
+  "note": "Reconstructed from per-task markdown after a T03-only rerun overwrote meta.json. Elapsed and usage come from the file headers."
+}
