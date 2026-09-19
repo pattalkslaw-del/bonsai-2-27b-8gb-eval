@@ -267,5 +267,126 @@
         }
       ]
     }
+  },
+  "ornith15-9b": {
+    "T01": {
+      "gofmt_ok": true,
+      "gofmt": "\n\t}\n\n\tctx, cancel := context.WithTimeout(r.Context(), 3*time.Second)\n\tdefer cancel()\n\n\tif err := s.store.Add(ctx, email); err != nil {\n\t\tif errors.Is(err, ErrDuplicate) {\n\t\t\tw.WriteHeader(http.StatusOK)\n\t\t\t_, _ = io.WriteString(w, \"already subscribed\")\n\t\t\treturn\n\t\t}\n\t\ts.logger.Error(\"failed to subscribe\", \"email\", email, \"error\", err)\n\t\thttp.Error(w, \"internal server error\", http.StatusInternalServerError)\n\t\treturn\n\t}\n\n\tw.WriteHeader(http.StatusCreated)\n\t_, _ = io.WriteString(w, \"subscribed\")\n}\n",
+      "govet_rc": 0,
+      "govet": "",
+      "build_rc": 1,
+      "build": "# t01\nruntime.main_main\u00b7f: function main is undeclared in the main package\n",
+      "compile_ok": false,
+      "ident_bug_net_mail": false,
+      "parseform_two_return": false
+    },
+    "T02": {
+      "src_chars": 723,
+      "checks": [
+        {
+          "name": "awaits_query",
+          "present": true
+        },
+        {
+          "name": "returns_404",
+          "present": true
+        },
+        {
+          "name": "null_id_check",
+          "present": true
+        },
+        {
+          "name": "opts_out_next_cache",
+          "present": false
+        },
+        {
+          "name": "keeps_module_cache",
+          "present": true
+        }
+      ],
+      "has_try": false
+    },
+    "T03": {
+      "syntax_ok": true,
+      "syntax": "",
+      "run_rc": 1,
+      "result": {
+        "parse_error": "file:///home/patrick/bonsai-test/sandbox/checks/t03/ornith15-9b/harness.js:9\n    import { INode, INodeExecutionData } from 'n8n-workflow';\n           ^\n\nSyntaxError: Unexpected token '{'\n    at compileSourceTextModule (node:internal/modules/esm/utils:346:16)\n    at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:146:18)\n    at #translate (node:internal/modules/esm/loader:497:12)\n    at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:544:27)\n    at async ModuleJob._link (node:internal/modules/esm/module_job:148:19)\n\nNode.js v20.20.2\n"
+      },
+      "uses_$input.all": false,
+      "uses_$items": false
+    },
+    "T04": {
+      "empty": true,
+      "chars": 0,
+      "schema_qualified_index": false,
+      "has_begin": false
+    },
+    "T05": {
+      "empty": true,
+      "chars": 0,
+      "mentions_temp_server": false,
+      "mentions_initdb": false,
+      "mentions_pg_isready": false,
+      "mentions_healthcheck": false
+    },
+    "T06": {
+      "ok": false,
+      "rc": 1,
+      "out": "# t06\nfee_test.go:6:2: package fee is not in std (/usr/lib/go-1.22/src/fee)\nFAIL\tt06 [setup failed]\nFAIL\n",
+      "pkg": "fee",
+      "impl_chars": 1164,
+      "test_chars": 2190
+    },
+    "T07": {
+      "q1_fn": false,
+      "q1_downstream": false,
+      "q2_budget_3": false,
+      "q2_set_site": false,
+      "q2_exceed_fn": false,
+      "q3_pair": false,
+      "all_three": false,
+      "answer": "(omitted; see runs/ornith15-9b)"
+    },
+    "T08": {
+      "parse_ok": true,
+      "error": null,
+      "n_calls": 5,
+      "flags": [],
+      "calls": [
+        {
+          "name": "list_matters",
+          "arguments": {
+            "status": "open"
+          }
+        },
+        {
+          "name": "get_invoice",
+          "arguments": {
+            "matter_id": "{{step_1.matters[0].matter_id}}"
+          }
+        },
+        {
+          "name": "get_invoice",
+          "arguments": {
+            "matter_id": "{{step_1.matters[1].matter_id}}"
+          }
+        },
+        {
+          "name": "get_invoice",
+          "arguments": {
+            "matter_id": "{{step_1.matters[2].matter_id}}"
+          }
+        },
+        {
+          "name": "send_email",
+          "arguments": {
+            "to": "billing@example.com",
+            "subject": "Reminder: Unpaid Invoices Over $500",
+            "body": "Dear Billing Team,\n\nThe following open matters have unpaid invoices exceeding $500:\n\n1. {{step_1.matters[0].matter_id}} \u2014 {{step_2.status}} {{step_2.amount}}\n2. {{step_1.matters[1].matter_id}} \u2014 {{step_3.status}} {{step_3.amount}}\n3. {{step_1.matters[2].matter_id}} \u2014 {{step_4.status}} {{step_4.amount}}\n\nPlease process these payments.\n\nRegards,\nBilling"
+          }
+        }
+      ]
+    }
   }
 }

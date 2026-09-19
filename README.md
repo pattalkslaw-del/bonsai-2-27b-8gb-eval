@@ -4,13 +4,14 @@ Independent measurement of [PrismML Ternary Bonsai 2 27B](https://huggingface.co
 
 This is a **quantization and serving test**, not a contest between two model families. Bonsai 2 27B is a ternary pack of Qwen3.8-27B. The two artifacts ran on different silicon and different runtimes; **no speed claim is made from the wall times**.
 
-Date of the scored runs: 2026-09-18 (America/Chicago).
+Date of the scored runs: 2026-09-18 (America/Chicago). Ornith-1.5-9B addendum the same night, same card.
 
-| | Bonsai 2 27B PTQ1_0 | Qwen3.8-27B GPTQ-Int4 |
-|---|---|---|
-| Suite total (max 80) | **46** | **71** |
-| Empty answers | T04, T05 (both `finish_reason=length` at 60k) | none in the scored set |
-| Compile/apply failures | T01 does not compile | none |
+| | Bonsai 2 27B PTQ1_0 | Qwen3.8-27B GPTQ-Int4 | Ornith-1.5-9B Q4_K_M |
+|---|---|---|---|
+| Suite total (max 80) | **46** | **71** | **38** |
+| Empty answers | T04, T05 (`length` at 60k) | none in the scored set | T04, T05, T07 (`length` at cap) |
+| Compile/apply failures | T01 does not compile | none | T03 is the wrong artifact; T01 builds with a stub main |
+| Silicon | RTX 2080 SUPER, llama.cpp, Q4 KV | Lawlab B70, vLLM | same 2080 SUPER, same llama.cpp, Q4 KV |
 
 Copy-ready wiki page: [WIKI.md](WIKI.md). Expanded write-up: [FINDINGS.md](FINDINGS.md). Table: [SCORES.csv](SCORES.csv). Serve flags: [SETTINGS.md](SETTINGS.md). Protocol: [METHOD.md](METHOD.md).
 
@@ -25,8 +26,9 @@ SETTINGS.md        model files, llama.cpp fork, build, serve flags, VRAM ceiling
 PROCESS-NOTES.md   what was discarded and why
 harness/           prompts, runner, rubric, mechanical checker
 fixtures/          long-context Go file and its generator
-runs/bonsai/       scored Bonsai outputs (answer + full thinking trace)
-runs/qwen38/       scored Qwen3.8 outputs
+runs/bonsai/          scored Bonsai outputs (answer + full thinking trace)
+runs/qwen38/          scored Qwen3.8 outputs
+runs/ornith15-9b/     scored Ornith-1.5-9B Q4_K_M outputs (same card as Bonsai)
 archive/           mixed/discarded Bonsai pass; first Qwen3.8 pass without traces
 checks/            mechanical-check results and extracted sources
 ```

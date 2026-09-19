@@ -126,3 +126,51 @@ The scored results above do not depend on those incidents except as labeling: mi
 ## Reproduce
 
 Repo has prompts, runner, rubric, mechanical checker, serve flags, and raw traces. Weights stay on Hugging Face. Fork stays upstream. Spark restore for the 2080 SUPER is in `PROCESS-NOTES.md` / `/home/patrick/bonsai-test/spark-restore-cmdline.txt`.
+
+
+## Addendum: Ornith-1.5-9B Q4_K_M on the same 2080 SUPER
+
+Same prompts, same sampling (temp 0.2, top_p 0.95, seed 1729, thinking on, timeout 7200), same Prism CUDA llama-server, same card, Q4 KV, 64k context. Weights: `ornith-ai/Ornith-1.5-9B-GGUF` / `Ornith-1.5-9B-Q4_K_M.gguf` (5,780,090,816 bytes, sha256 `70c112196e0b7023803c9762752e46d29e612a92c83f995bc3ba1ceb07e8fab6`). MTP `blk.32` tensors in the GGUF are unused by this llama.cpp. One runner, request body frozen. Started 2026-09-18 22:50 CT, finished 23:49 CT. Traces: `runs/ornith15-9b/`.
+
+Suite total: **Ornith 38 / 80**, **Bonsai 46 / 80**. Qwen3.8 remains 71/80 on different silicon and is not restated here as a speed or family contest.
+
+Headline versus Bonsai, same card: the 9B pack compiles the Go handler Bonsai smashed, and its fee tests pass when `go.mod` matches the `fee` import. It loses the long-context task that Bonsai scored 10 on (45k think tokens, empty content). T04 and T05 are empty on both, `finish_reason=length` at 60k. T03 is the wrong artifact (typed n8n node wrapper, not a Code-node body).
+
+VRAM: about 6120 / 8192 MiB at 64k Q4 KV (Bonsai was 7724 MiB). Decode is faster because the model is 9B, not because the 9B is a better 27B. Quality is the comparison.
+
+### Per-task versus Bonsai (C / I / Conc = total)
+
+| task | Bonsai | Ornith | note |
+|---|---|---|---|
+| T01 go-handler | 6 | 10 | Ornith `mail.ParseAddress` compiles with a stub main |
+| T02 ts-bugfix | 10 | 8 | Ornith keeps an unbounded Map cache |
+| T03 n8n-code-node | 8 | 4 | Ornith returned INode scaffolding; mechanical fail |
+| T04 sql-migration | 0 | 0 | both empty at 60k |
+| T05 log-diagnosis | 0 | 0 | both empty at 60k |
+| T06 refactor-tests | 5 | 8 | Ornith tests pass with `module fee`; Bonsai cap==0 bug |
+| T07 long-context | 10 | 0 | Ornith empty at 45k; Bonsai answered all three |
+| T08 tool-call | 7 | 8 | Ornith one get_invoice per assumed index 0..2 |
+| **suite** | **46** | **38** | |
+
+### Token / time (same card; not a quality claim)
+
+| task | Bonsai s | Bonsai tok | finish | Ornith s | Ornith tok | finish |
+|---|---|---|---|---|---|---|
+| T01 | 359 | 9,688 | stop | 74 | 5,073 | stop |
+| T02 | 493 | 13,155 | stop | 57 | 3,944 | stop |
+| T03 | 2,212 | 50,742 | stop | 108 | 7,364 | stop |
+| T04 | 2,716 | 60,000 | length | 1,059 | 60,000 | length |
+| T05 | 2,721 | 60,000 | length | 1,061 | 60,000 | length |
+| T06 | 1,065 | 26,735 | stop | 290 | 18,943 | stop |
+| T07 | 255 | 4,976 | stop | 847 | 45,000 | length |
+| T08 | 244 | 6,660 | stop | 47 | 3,212 | stop |
+
+Ornith wall time for the scored pass: about 59 minutes.
+
+### Hallucination flags (Ornith, not netted)
+
+- T03: invented `n8n-workflow` `INode` wrapper instead of a Code-node body.
+- T08: assumed exactly three open matters (`matters[0..2]`).
+
+T01 `mail.ParseAddress` is the real API.
+

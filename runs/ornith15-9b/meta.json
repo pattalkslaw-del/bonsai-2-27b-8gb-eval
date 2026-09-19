@@ -1,0 +1,123 @@
+{
+  "label": "ornith15-9b",
+  "model": "/home/patrick/models/Ornith-1.5-9B-Q4_K_M.gguf",
+  "base_url": "http://127.0.0.1:8097/v1",
+  "temperature": 0.2,
+  "seed": 1729,
+  "started": "2026-09-18T22:50:38-0500",
+  "tasks": {
+    "T01": {
+      "name": "go-handler",
+      "category": "code-gen",
+      "elapsed_s": 73.53,
+      "usage": {
+        "completion_tokens": 5073,
+        "prompt_tokens": 253,
+        "total_tokens": 5326,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "finish_reason": "stop"
+    },
+    "T02": {
+      "name": "ts-bugfix",
+      "category": "debug",
+      "elapsed_s": 57.13,
+      "usage": {
+        "completion_tokens": 3944,
+        "prompt_tokens": 255,
+        "total_tokens": 4199,
+        "prompt_tokens_details": {
+          "cached_tokens": 29
+        }
+      },
+      "finish_reason": "stop"
+    },
+    "T03": {
+      "name": "n8n-code-node",
+      "category": "code-gen",
+      "elapsed_s": 107.99,
+      "usage": {
+        "completion_tokens": 7364,
+        "prompt_tokens": 248,
+        "total_tokens": 7612,
+        "prompt_tokens_details": {
+          "cached_tokens": 29
+        }
+      },
+      "finish_reason": "stop"
+    },
+    "T04": {
+      "name": "sql-migration",
+      "category": "code-gen",
+      "elapsed_s": 1059.04,
+      "usage": {
+        "completion_tokens": 60000,
+        "prompt_tokens": 296,
+        "total_tokens": 60296,
+        "prompt_tokens_details": {
+          "cached_tokens": 29
+        }
+      },
+      "finish_reason": "length"
+    },
+    "T05": {
+      "name": "log-diagnosis",
+      "category": "debug",
+      "elapsed_s": 1060.74,
+      "usage": {
+        "completion_tokens": 60000,
+        "prompt_tokens": 359,
+        "total_tokens": 60359,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "finish_reason": "length"
+    },
+    "T06": {
+      "name": "refactor-tests",
+      "category": "code-gen",
+      "elapsed_s": 290.21,
+      "usage": {
+        "completion_tokens": 18943,
+        "prompt_tokens": 237,
+        "total_tokens": 19180,
+        "prompt_tokens_details": {
+          "cached_tokens": 29
+        }
+      },
+      "finish_reason": "stop"
+    },
+    "T07": {
+      "name": "long-context",
+      "category": "recall",
+      "elapsed_s": 846.52,
+      "usage": {
+        "completion_tokens": 45000,
+        "prompt_tokens": 16039,
+        "total_tokens": 61039,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "finish_reason": "length"
+    },
+    "T08": {
+      "name": "tool-call",
+      "category": "agentic",
+      "elapsed_s": 46.91,
+      "usage": {
+        "completion_tokens": 3212,
+        "prompt_tokens": 244,
+        "total_tokens": 3456,
+        "prompt_tokens_details": {
+          "cached_tokens": 29
+        }
+      },
+      "finish_reason": "stop"
+    }
+  },
+  "finished": "2026-09-18T23:49:40-0500"
+}

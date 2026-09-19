@@ -261,8 +261,15 @@ def t05_note(lab):
 
 
 def main():
+    import sys
+    labs = [a for a in sys.argv[1:] if a]
+    if not labs:
+        labs = ["bonsai", "qwen38", "ornith15-9b"]
     results = {}
-    for lab in ["bonsai", "qwen38"]:
+    for lab in labs:
+        if not (RUNS / lab).exists():
+            print("skip missing", lab, flush=True)
+            continue
         results[lab] = {
             "T01": t01(lab),
             "T02": t02(lab),

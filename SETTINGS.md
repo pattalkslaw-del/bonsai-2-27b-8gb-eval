@@ -125,3 +125,38 @@ Lawlab is an AMD EPYC 7532 with 256 GB DDR4 and two Intel Arc Pro B70s. Qwen3.8-
 ```
 
 T07 uses `max_tokens` 45000. Thinking is left at the server/template default (on). A mid-suite experiment that added `chat_template_kwargs: {"enable_thinking": true}` is archived, not scored; see PROCESS-NOTES.md.
+
+## Ornith-1.5-9B Q4_K_M (addendum, same card)
+
+Hugging Face: [`ornith-ai/Ornith-1.5-9B-GGUF`](https://huggingface.co/ornith-ai/Ornith-1.5-9B-GGUF)
+
+Pulled 2026-09-18:
+
+| file | size | sha256 |
+|---|---|---|
+| `Ornith-1.5-9B-Q4_K_M.gguf` | 5,780,090,816 | `70c112196e0b7023803c9762752e46d29e612a92c83f995bc3ba1ceb07e8fab6` |
+
+Vision mmproj was not pulled. MTP / `blk.32` nextn tensors are present in the GGUF and unused by this llama.cpp (`unused tensor blk.32.* -- ignoring`).
+
+Same binary as Bonsai (Prism CUDA build, sm_75). Stock llama.cpp on this box is a SYCL build and was not used.
+
+Serve command for the scored Ornith pass (Bonsai was stopped first; one process on :8097):
+
+```bash
+export LD_LIBRARY_PATH=/path/to/cudalibs:/path/to/build/bin
+export CUDA_DEVICE_ORDER=PCI_BUS_ID
+export CUDA_VISIBLE_DEVICES=1
+
+./build/bin/llama-server \
+  -m /path/to/Ornith-1.5-9B-Q4_K_M.gguf \
+  -ngl 99 \
+  -c 65536 \
+  -fa on \
+  --cache-type-k q4_0 \
+  --cache-type-v q4_0 \
+  --host 127.0.0.1 \
+  --port 8097 \
+  --jinja
+```
+
+Reported `/v1/models` meta: n_params 9197093888, n_ctx 65536, n_ctx_train 262144, ftype Q4_K Medium. VRAM while serving: about 6120 / 8192 MiB on the RTX 2080 SUPER. Process pid 762700. Client request body identical to the Bonsai scored pass. Do not add `chat_template_kwargs` mid-suite.

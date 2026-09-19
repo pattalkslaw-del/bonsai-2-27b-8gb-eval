@@ -47,3 +47,16 @@ Bonsai replaced a Spark-X2.5-4B server on this card for the eval. The restore co
 ```
 
 Paths are machine-local. Vulkan1 is the 2080 SUPER on Render-1's Vulkan build; the Bonsai server used CUDA, not Vulkan.
+
+## Ornith-1.5-9B pass
+
+`runs/ornith15-9b/` is a clean pass. One runner:
+
+```
+python3 run_suite.py --label ornith15-9b --base-url http://127.0.0.1:8097/v1 \
+    --model /home/patrick/models/Ornith-1.5-9B-Q4_K_M.gguf \
+    --out runs/ornith15-9b --timeout 7200
+```
+
+Started 2026-09-18T22:50:38-0500, finished 2026-09-18T23:49:40-0500. Bonsai llama-server was stopped first. Same request body as the scored Bonsai pass. No second runner. No mid-suite edit.
+

@@ -1,34 +1,34 @@
-task,axis,bonsai,qwen38,notes
-T01,correctness,2,5,"Bonsai does not compile: `net/mail.ParseAddress` is parsed as `net` / `mail.ParseAddress`. Qwen3.8 passes gofmt+vet; go build needs no func main because the prompt asked for a handler."
-T01,instruction_following,2,3,"Bonsai identifier corruption. Qwen uses a regex instead of net/mail; stdlib-only honored. Both returned code."
-T01,concision,2,2,"Code only."
-T01,total,6,10,
-T02,correctness,5,5,"Both await the query, return 404, validate id, drop the module cache, handle rejection."
-T02,instruction_following,3,3,"Defect list plus corrected file."
-T02,concision,2,2,
-T02,total,10,10,"Qwen also sets `export const dynamic = 'force-dynamic'`."
-T03,correctness,4,5,"Both emit the two survivors and skip malformed date/url. Bonsai uses `$items` (not `$input.all()`). Dropped-count differs: Bonsai 1 (age only), Qwen 2 (age + discarded duplicate)."
-T03,instruction_following,2,3,"Bonsai's `$items` is not the documented n8n Code-node API for Run Once for All Items."
-T03,concision,2,2,"Code only."
-T03,total,8,10,
-T04,correctness,0,5,"Bonsai hit max_tokens=60000 with empty content (finish_reason=length). Qwen applies twice on Postgres 16: 5 payments, no duplicates, index present, trigger reconciles an extra insert."
-T04,instruction_following,0,3,
-T04,concision,0,2,
-T04,total,0,10,
-T05,correctness,0,5,"Bonsai empty, finish_reason=length. Qwen names the official image's temporary initdb server, why pg_isready passes, and a healthcheck that rejects `config_file=` in postmaster.opts."
-T05,instruction_following,0,3,
-T05,concision,0,1,"Qwen is long but complete."
-T05,total,0,9,
-T06,correctness,2,2,"Mechanical cap: go test on the model's own tests failed both. Bonsai applies cap==0 to every fee so 'no cap' cases return 0. Qwen fails 1 of ~35 cases (0.005h at 2c/h rounding)."
-T06,instruction_following,2,2,"Both changed the signature (typed kind, errors). Qwen also changed hours to time.Duration and cap to *int."
-T06,concision,1,1,
-T06,total,5,5,
-T07,correctness,5,5,"Both: cacheWarm swallows Load, readIndex returns ErrNotFound; defaultRetryBudget=3 set in newClient, drainQueue exceeds it; lockAll+flushSegment deadlock on non-reentrant mu."
-T07,instruction_following,3,3,
-T07,concision,2,2,
-T07,total,10,10,
-T08,correctness,3,3,"JSON parses; tools are real; send_email goes to billing@example.com. Both issue one get_invoice over the whole list instead of one call per matter_id. No unpaid>$500 filter step (no such tool exists; they stuffed it into the email body)."
-T08,instruction_following,2,2,"Required JSON array with {{step_N.field}}. get_invoice.matter_id is a string, not a list."
-T08,concision,2,2,
-T08,total,7,7,
-SUITE,total,46,71,"Max 80. Hallucination flags are listed in FINDINGS.md and are not netted into these totals."
+task,axis,bonsai,qwen38,ornith15_9b,notes
+T01,correctness,2,5,5,"Bonsai does not compile: `net/mail.ParseAddress` is parsed as `net` / `mail.ParseAddress`. Qwen3.8 passes gofmt+vet. Ornith uses `mail.ParseAddress` correctly; gofmt+vet clean; `go build` fails only because the file is `package main` without `func main` (prompt asked for a handler). Stub main builds."
+T01,instruction_following,2,3,3,"Bonsai identifier corruption. Qwen uses a regex instead of net/mail; stdlib-only honored. Ornith matches the asked design (struct method, Subscriber, ErrDuplicate, 3s timeout, slog)."
+T01,concision,2,2,2,"Code only."
+T01,total,6,10,10,
+T02,correctness,5,5,4,"Bonsai and Qwen await the query, return 404, validate id, drop the module cache. Ornith does the first three and keeps an unbounded Map cache (copy-on-write, still unbounded)."
+T02,instruction_following,3,3,2,"Defect list plus corrected file. Ornith missed unbounded cache as a named defect."
+T02,concision,2,2,2,
+T02,total,10,10,8,
+T03,correctness,4,5,2,"Bonsai and Qwen emit survivors against the frozen-clock fixture. Bonsai uses `$items`. Ornith mechanical fail: returned a typed n8n-workflow node wrapper plus `output(items)`, not a Code-node body; harness cannot execute it. Cap at 2."
+T03,instruction_following,2,3,1,"Bonsai `$items` is not the documented API. Ornith did not return the JavaScript body of a Code node."
+T03,concision,2,2,1,"Ornith added INode scaffolding."
+T03,total,8,10,4,
+T04,correctness,0,5,0,"Bonsai and Ornith hit max_tokens=60000 with empty content (finish_reason=length). Qwen applies twice on Postgres 16."
+T04,instruction_following,0,3,0,
+T04,concision,0,2,0,
+T04,total,0,10,0,
+T05,correctness,0,5,0,"Bonsai and Ornith empty, finish_reason=length. Qwen names the official image's temporary initdb server."
+T05,instruction_following,0,3,0,
+T05,concision,0,1,0,"Qwen is long but complete."
+T05,total,0,9,0,
+T06,correctness,2,2,5,"Published checker uses `module t06`, which breaks Ornith's `package fee_test` / `import \"fee\"`. With `module fee` (the import the tests declare), `go test` passes all cases. Bonsai and Qwen failed their own tests on real logic. Cap==0 is no-cap in Ornith."
+T06,instruction_following,2,2,2,"All three changed the signature. Ornith returns (int, error)."
+T06,concision,1,1,1,
+T06,total,5,5,8,
+T07,correctness,5,5,0,"Bonsai and Qwen: cacheWarm swallows Load; defaultRetryBudget=3 in newClient; lockAll+flushSegment deadlock. Ornith hit max_tokens=45000 with empty content (finish_reason=length)."
+T07,instruction_following,3,3,0,
+T07,concision,2,2,0,
+T07,total,10,10,0,
+T08,correctness,3,3,4,"JSON parses; tools are real; send_email to billing@example.com. Bonsai and Qwen issue one get_invoice over the whole list. Ornith issues one get_invoice per assumed index 0..2; still no unpaid>$500 filter step; hardcodes three matters."
+T08,instruction_following,2,2,2,"Required JSON array with {{step_N.field}}. Ornith get_invoice.matter_id is a string. Assumed n=3."
+T08,concision,2,2,2,
+T08,total,7,7,8,
+SUITE,total,46,71,38,"Max 80. Hallucination flags are listed in FINDINGS.md and are not netted into these totals."
